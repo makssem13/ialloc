@@ -7,8 +7,6 @@ Features:
 	3. Semi-automatic error handling
 */
 
-#include "ialloc.h"
-
 void** AllocList = NULL; //  pointer to the array of allocated memories
 int    AllocListSize = 0; //     size of AllocList
 int    AllocListCur = 0; //     current amount of allocated memory chunks
@@ -96,6 +94,7 @@ void ifree(void* pointer, void (*ErrorHandler)()) {
 
 //intelligent end allocations
 void iend() {
+	if (AllocList == NULL) { return; }
 	for (int counter = 0; counter < AllocListCur; counter++) {
 		if (AllocList[counter] != NULL) {
 			free(AllocList[counter]);
