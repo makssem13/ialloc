@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-extern void** AllocList = NULL; //  pointer to the array of allocated memories
-extern int    AllocListSize = 0; //     size of AllocList
-extern int    AllocListCur = 0; //     current amount of allocated memory chunks
+extern void** AllocList; //  pointer to the array of allocated memories
+extern int    AllocListSize; //     size of AllocList
+extern int    AllocListCur; //     current amount of allocated memory chunks
 
 void AL_Add(void* pointer, void (*ErrorHandler)());
 void* imalloc(size_t size, void (*ErrorHandler)());
