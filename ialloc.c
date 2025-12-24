@@ -6,13 +6,12 @@ Features:
 	2. Easy all-cleanup
 	3. Semi-automatic error handling
 */
+#include "ialloc.h"
 
 void** AllocList = NULL; //  pointer to the array of allocated memories
 int    AllocListSize = 0; //     size of AllocList
 int    AllocListCur = 0; //     current amount of allocated memory chunks
 
-
-#include "ialloc.h"
 
 void AL_Add(void* pointer, void (*ErrorHandler)()) {
 
