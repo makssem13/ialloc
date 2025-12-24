@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stddef.h>
 
 extern void** AllocList = NULL; //  pointer to the array of allocated memories
 extern int    AllocListSize = 0; //     size of AllocList
