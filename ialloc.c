@@ -16,7 +16,7 @@ int    AllocListCur = 0; //     current amount of allocated memory chunks
 void AL_Add(void* pointer, void (*ErrorHandler)()) {
 
 
-	if (AllocListCur == 0) {
+	if (AllocListSize == 0) {
 		AllocList = calloc(1, sizeof(void*));
 		AllocListSize = 1;
 	}
