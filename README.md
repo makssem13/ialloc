@@ -5,7 +5,7 @@ A simple malloc/calloc/realloc/free intelligent wrapper that makes your life eas
 - Semi-automatic NULL pointer handling
 - Easy all-cleanup
 
-### compiling ialloc
+### Compiling ialloc
 
 You can use ialloc in your projects via FetchContent_Declare and FetchContent_MakeAvaible functions in CMake
 
