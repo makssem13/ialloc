@@ -79,7 +79,7 @@ void* irealloc(void *pointer, size_t size, void (*ErrorHandler)()) {
 }
 
 //intelligent free
-void ifree(void* pointer, void (*ErrorHandler)()) {
+void ifree(void* pointer) {
 	if (pointer == NULL) { return; }
 	for (int counter = 0; counter < AllocListCur; counter++) {
 		if (AllocList[counter] == pointer) {
