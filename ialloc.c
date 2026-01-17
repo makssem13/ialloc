@@ -63,6 +63,9 @@ void* icalloc(size_t lengh, size_t size, void (*ErrorHandler)()) {
 
 // intelligent realloc
 void* irealloc(void *pointer, size_t size, void (*ErrorHandler)()) {
+	if(pointer == NULL){
+		return imalloc(size, ErrorHandler);
+	}
 	void *old = pointer;
 	void *array = realloc(pointer, size);
 	if (array == NULL) {
