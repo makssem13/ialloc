@@ -78,7 +78,7 @@ jobs:
         
     - name: Upload binary to latest release
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         LATEST_TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
         echo "Uploading ${{ steps.binary.outputs.binary_path }} to release $LATEST_TAG"
