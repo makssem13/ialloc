@@ -78,6 +78,7 @@ jobs:
         fi
         
     - name: Upload binary to latest release
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
