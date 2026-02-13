@@ -76,13 +76,23 @@ jobs:
         else
           echo "binary_path=${{ github.workspace }}/build/ialloc.lib" >> "$GITHUB_OUTPUT"
         fi
-        
+    
+    - name: Upload binary to latest release
+      if: runner.os == 'Windows'
+      shell: pwsh
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        $LATEST_TAG = gh release list --limit 1 --json tagName,isDraft -q '.[] | select(.isDraft | not) | .tagName'
+        Write-Host "Uploading $env:binary_path to release $LATEST_TAG"
+        gh release upload $LATEST_TAG $env:binary_path --clobber
+    
     - name: Upload binary to latest release
       shell: bash
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
-        BINARY_PATH=$(echo "${{ steps.binary.outputs.binary_path }}" | sed -E 's|^([A-Z]):|/\L\1|; s|\\|/|g')
+        BINARY_PATH=$(echo "${{ steps.binary.outputs.binary_path }}" | sed -E 's|\\|/|g')
         LATEST_TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
         echo "Uploading $BINARY_PATH to release $LATEST_TAG"
         gh release upload $LATEST_TAG "$BINARY_PATH" --clobber
