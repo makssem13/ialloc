@@ -72,7 +72,11 @@ jobs:
       shell: bash
       run: |
         if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-          echo "binary_path=${{ github.workspace }}/build/libialloc.a" >> "$GITHUB_OUTPUT"
+          if [[ "${{ matrix.c_compiler }}" == "gcc" ]]; then
+            echo "binary_path=${{ github.workspace }}/build/libialloc_gcc.a" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.c_compiler }}" == "clang" ]]; then
+            echo "binary_path=${{ github.workspace }}/build/libialloc_clang.a" >> "$GITHUB_OUTPUT"
+          fi
         else
           echo "binary_path=${{ github.workspace }}/build/Release/ialloc.lib" >> "$GITHUB_OUTPUT"
         fi
