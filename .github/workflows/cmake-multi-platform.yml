@@ -82,6 +82,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
+        BINARY_PATH=$(echo "${{ steps.binary.outputs.binary_path }}" | sed 's|\\|/|g')
         LATEST_TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
-        echo "Uploading ${{ steps.binary.outputs.binary_path }} to release $LATEST_TAG"
-        gh release upload $LATEST_TAG ${{ steps.binary.outputs.binary_path }} --clobber
+        echo "Uploading $BINARY_PATH to release $LATEST_TAG"
+        gh release upload $LATEST_TAG "$BINARY_PATH" --clobber
