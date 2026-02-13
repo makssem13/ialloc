@@ -69,6 +69,7 @@ jobs:
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
     - name: Set binary path
       id: binary
+      shell: bash
       run: |
         if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
           echo "binary_path=${{ github.workspace }}/build/libialloc.a" >> "$GITHUB_OUTPUT"
