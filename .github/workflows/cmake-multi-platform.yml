@@ -83,10 +83,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
-        $binary_path = '${{ steps.binary.outputs.binary_path }}'
+        $binary_path = "${{ steps.binary.outputs.binary_path }}" -replace '/', '\'
         $LATEST_TAG = (gh release list --limit 1 --json tagName,isDraft -q '.[] | select(.isDraft | not) | .tagName').Trim()
         Write-Host "Uploading $binary_path to release $LATEST_TAG"
-        gh release upload $LATEST_TAG $binary_path --clobber
+        gh release upload "$LATEST_TAG" "$binary_path" --clobber
     
     - name: Upload binary to latest release
       shell: bash
