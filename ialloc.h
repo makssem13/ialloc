@@ -11,5 +11,5 @@ void AL_Add(void* pointer, void (*ErrorHandler)());
 void* imalloc(size_t size, void (*ErrorHandler)());
 void* icalloc(size_t lengh, size_t size, void (*ErrorHandler)());
 void* irealloc(void* pointer, size_t size, void (*ErrorHandler)());
-void ifree(void* pointer, void (*ErrorHandler)());
+void ifree(void* pointer);
 void iend();
