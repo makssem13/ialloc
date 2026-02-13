@@ -15,19 +15,23 @@ int    AllocListCur = 0; //     current amount of allocated memory chunks
 
 void AL_Add(void* pointer, void (*ErrorHandler)()) {
 
-
+	void **old_AllocList = AllocList;
+	
 	if (AllocListSize == 0) {
 		AllocList = calloc(1, sizeof(void*));
 		AllocListSize = 1;
 	}
 
 	if (AllocListSize == AllocListCur) {
+		old_AllocList = AllocList;
 		AllocList = realloc(AllocList, AllocListSize * sizeof(void*) * 2); // vector-like size handling
 		AllocListSize *= 2;
 	}
 
 	
 	if (AllocList == NULL) {
+		free(pointer);
+		AllocList = old_AllocList;
 		(*ErrorHandler)();
 	}
 
