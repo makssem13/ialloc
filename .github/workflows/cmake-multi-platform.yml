@@ -74,7 +74,7 @@ jobs:
         if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
           echo "binary_path=${{ github.workspace }}/build/libialloc.a" >> "$GITHUB_OUTPUT"
         else
-          echo "binary_path=${{ github.workspace }}/build/ialloc.lib" >> "$GITHUB_OUTPUT"
+          echo "binary_path=${{ github.workspace }}/build/Release/ialloc.lib" >> "$GITHUB_OUTPUT"
         fi
     
     - name: Upload binary to latest release
