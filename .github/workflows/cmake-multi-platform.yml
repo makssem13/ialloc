@@ -52,7 +52,12 @@ jobs:
       id: strings
       shell: bash
       run: |
-        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+          echo "binary_path=${{ github.workspace }}/build/libialloc.a" >> "$GITHUB_OUTPUT"
+        else
+          # для Windows з Visual Studio multi-config генератором
+          echo "binary_path=${{ github.workspace }}/build/Release/ialloc.lib" >> "$GITHUB_OUTPUT"
+        fi
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
