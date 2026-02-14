@@ -18,7 +18,9 @@ irealloc()
 ifree()
 iend()
 ```
-All of them except of `iend` is analog of standard function from stdlib but get's pointer to error handler as last argument. Error handler don't get any argument.
+All of them except of `iend` and `ifree` is analog of standard function from stdlib but get's pointer to error handler as last argument. Error handler don't get any argument.
+
+`ifree` is apart from others because it doesn't get error handler like last argument, just pointer.
 
 `iend` is a function that free's anything and need's to be always called at the end of program.
 
@@ -42,6 +44,7 @@ int main(){
   ifree(mem); // here is ifree
   iend();
   return 0;
+}
 ```
 
 But you can write this code also and it will work:
@@ -64,4 +67,5 @@ int main(){
   // here is no ifree
   iend();
   return 0;
+}
 ```
