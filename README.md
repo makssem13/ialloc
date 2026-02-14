@@ -11,7 +11,7 @@ You can use ialloc in your projects via FetchContent_Declare and FetchContent_Ma
 
 ### Working with ialloc:
 There are some functions that you can use:
-```
+```C
 imalloc()
 icalloc()
 irealloc()
@@ -24,7 +24,7 @@ All of them except of `iend` is analog of standard function from stdlib but get'
 
 #### example of use:
 
-```
+```C
 #include <stdio.h>
 #include <ialloc.h>
 
@@ -46,7 +46,7 @@ int main(){
 
 But you can write this code also and it will work:
 
-```
+```C
 #include <stdio.h>
 #include <ialloc.h>
 
