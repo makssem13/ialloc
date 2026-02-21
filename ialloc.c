@@ -32,6 +32,7 @@ void AL_Add(void* pointer, void (*ErrorHandler)()) {
 	if (AllocList == NULL) {
 		free(pointer);
 		AllocList = old_AllocList;
+		AllocListSize /= 2;
 		(*ErrorHandler)();
 	}
 
