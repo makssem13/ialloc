@@ -7,7 +7,6 @@ Features:
 	3. Semi-automatic error handling
 */
 #include "ialloc.h"
-#include "stdbool.h"
 
 void** AllocList = NULL; //  pointer to the array of allocated memories
 int    AllocListSize = 0; // size of AllocList
