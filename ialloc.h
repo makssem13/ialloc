@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdbool.h>
 
 extern void** AllocList; //  pointer to the array of allocated memories
 extern int    AllocListSize; //     size of AllocList
