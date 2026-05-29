@@ -7,13 +7,14 @@ Features:
 	3. Semi-automatic error handling
 */
 #include "ialloc.h"
+#include "stdbool.h"
 
 void** AllocList = NULL; //  pointer to the array of allocated memories
 int    AllocListSize = 0; // size of AllocList
 int    AllocListCur = 0; //  current amount of allocated memory chunks
 
 
-void AL_Add(void* pointer, void (*ErrorHandler)()) {
+bool AL_Add(void* pointer, void (*ErrorHandler)()) {
 
 	void **old_AllocList = AllocList;
 	
@@ -34,12 +35,13 @@ void AL_Add(void* pointer, void (*ErrorHandler)()) {
 		AllocList = old_AllocList;
 		AllocListSize /= 2;
 		(*ErrorHandler)();
+		return false;
 	}
 
 	
 	AllocList[AllocListCur] = pointer;
 	AllocListCur++;
-	return;
+	return true;
 }
 
 // intelligent malloc
@@ -47,9 +49,10 @@ void *imalloc(size_t size, void (*ErrorHandler)()) {
 	void *array = malloc(size);
 	if (array == NULL) {
 		(*ErrorHandler)();
+		return NULL;
 	}
 	else {
-		AL_Add(array, ErrorHandler);
+		if(!AL_Add(array, ErrorHandler)){return NULL;}
 		return array;
 	}
 }
@@ -59,9 +62,10 @@ void* icalloc(size_t lengh, size_t size, void (*ErrorHandler)()) {
 	void *array = calloc(lengh, size);
 	if (array == NULL) {
 		(*ErrorHandler)();
+		return NULL;
 	}
 	else {
-		AL_Add(array, ErrorHandler);
+		if(!AL_Add(array, ErrorHandler)){return NULL;}
 		return array;
 	}
 }
@@ -75,6 +79,7 @@ void* irealloc(void *pointer, size_t size, void (*ErrorHandler)()) {
 	void *array = realloc(pointer, size);
 	if (array == NULL) {
 		(*ErrorHandler)();
+		return NULL;
 	}
 	else {
 		for (int counter = 0; counter < AllocListCur; counter++) {
