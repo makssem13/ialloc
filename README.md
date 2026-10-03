@@ -7,7 +7,7 @@ A simple malloc/calloc/realloc/free intelligent wrapper that makes your life eas
 
 ### Compiling ialloc
 
-You can use ialloc in your projects via FetchContent_Declare and FetchContent_MakeAvaible functions in CMake
+You can use ialloc in your projects via FetchContent_Declare and FetchContent_MakeAvailable functions in CMake
 
 ### Working with ialloc:
 There are some functions that you can use:
