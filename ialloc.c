@@ -117,5 +117,7 @@ void iend() {
 	}
 	free(AllocList);
 	AllocList = NULL;
+	AllocListSize = 0;
+	AllocListCur = 0;
 	return;
 }
