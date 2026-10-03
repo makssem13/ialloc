@@ -1,6 +1,5 @@
 /*
 ialloc: intelligent memory allocation library
-WARNING: Don't look there for fancy very good looking code
 Features:
 	1. Works with all popular compilers
 	2. Easy all-cleanup
@@ -13,6 +12,7 @@ int    AllocListSize = 0; // size of AllocList
 int    AllocListCur = 0; //  current amount of allocated memory chunks
 
 
+// add pointer to AllocList
 bool AL_Add(void* pointer, void (*ErrorHandler)()) {
 
 	void **old_AllocList = AllocList;
@@ -43,7 +43,7 @@ bool AL_Add(void* pointer, void (*ErrorHandler)()) {
 	return true;
 }
 
-// intelligent malloc
+// safe malloc
 void *imalloc(size_t size, void (*ErrorHandler)()) {
 	void *array = malloc(size);
 	if (array == NULL) {
@@ -56,7 +56,7 @@ void *imalloc(size_t size, void (*ErrorHandler)()) {
 	}
 }
 
-// intelligent calloc
+// safe calloc
 void* icalloc(size_t lengh, size_t size, void (*ErrorHandler)()) {
 	void *array = calloc(lengh, size);
 	if (array == NULL) {
@@ -69,7 +69,7 @@ void* icalloc(size_t lengh, size_t size, void (*ErrorHandler)()) {
 	}
 }
 
-// intelligent realloc
+// safe realloc
 void* irealloc(void *pointer, size_t size, void (*ErrorHandler)()) {
 	if(pointer == NULL){
 		return imalloc(size, ErrorHandler);
@@ -90,7 +90,7 @@ void* irealloc(void *pointer, size_t size, void (*ErrorHandler)()) {
 	}
 }
 
-//intelligent free
+// free ialloc pointer
 void ifree(void* pointer) {
 	if (pointer == NULL) { return; }
 	for (int counter = 0; counter < AllocListCur; counter++) {
@@ -106,7 +106,7 @@ void ifree(void* pointer) {
 	return;
 }
 
-//intelligent end allocations
+// end ialloc session
 void iend() {
 	if (AllocList == NULL) { return; }
 	for (int counter = 0; counter < AllocListCur; counter++) {
